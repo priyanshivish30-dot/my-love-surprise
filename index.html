@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Little Surprise ❤️</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#000;
+  font-family:Arial,sans-serif;
+}
+
+.page{
+  width:100%;
+  height:100vh;
+  display:none;
+  position:relative;
+  justify-content:center;
+  align-items:center;
+  background:#000;
+}
+
+.page.active{
+  display:flex;
+}
+
+.page img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+button{
+  border:none;
+  cursor:pointer;
+}
+
+/* General buttons */
+.nextBtn{
+  position:absolute;
+  bottom:7%;
+  left:50%;
+  transform:translateX(-50%);
+  padding:14px 30px;
+  border-radius:30px;
+  background:#ff5c8a;
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+  box-shadow:0 4px 15px rgba(255,92,138,.4);
+}
+
+/* YES / NO */
+.choice{
+  position:absolute;
+  bottom:8%;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:20px;
+}
+
+.choice button{
+  padding:13px 30px;
+  border-radius:25px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.yes{
+  background:#ff4f81;
+  color:white;
+}
+
+.no{
+  background:white;
+  color:#ff4f81;
+}
+
+/* Balloon page */
+#balloonPage{
+  overflow:hidden;
+}
+
+.balloon-area{
+  position:absolute;
+  inset:0;
+}
+
+.balloon-hit{
+  position:absolute;
+  width:24%;
+  height:48%;
+  background:transparent;
+  border:none;
+  z-index:5;
+}
+
+.b1{left:2%;top:12%}
+.b2{left:27%;top:8%}
+.b3{left:51%;top:10%}
+.b4{left:74%;top:12%}
+
+.balloon-hit.popped{
+  pointer-events:none;
+}
+
+.message{
+  position:absolute;
+  left:50%;
+  bottom:12%;
+  transform:translateX(-50%);
+  width:85%;
+  padding:16px 20px;
+  background:rgba(255,255,255,.95);
+  color:#e83d70;
+  border-radius:20px;
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  z-index:10;
+  animation:floatUp .7s ease;
+}
+
+@keyframes floatUp{
+  from{
+    opacity:0;
+    transform:translate(-50%,30px);
+  }
+  to{
+    opacity:1;
+    transform:translate(-50%,0);
+  }
+}
+
+/* Final text page */
+.finalText{
+  color:white;
+  text-align:center;
+  padding:30px;
+}
+
+.finalText h1{
+  font-size:42px;
+  color:#ff6f9c;
+  margin-bottom:20px;
+}
+
+.finalText p{
+  font-size:22px;
+  line-height:1.5;
+}
+
+.heart{
+  font-size:55px;
+  margin-bottom:15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 1 ENVELOPE -->
+<div class="page active" id="page1">
+  <img src="envelope.png">
+  <button class="nextBtn" onclick="go(2)">Open With Love ❤️</button>
+</div>
+
+<!-- 2 WELCOME -->
+<div class="page" id="page2">
+  <img src="welcome.png">
+  <button class="nextBtn" onclick="go(3)">Continue 💗</button>
+</div>
+
+<!-- 3 ME + YOU -->
+<div class="page" id="page3">
+  <img src="me-you.png">
+  <button class="nextBtn" onclick="go(4)">Next ❤️</button>
+</div>
+
+<!-- 4 DO YOU LOVE ME -->
+<div class="page" id="page4">
+  <img src="love-question.png">
+  <div class="choice">
+    <button class="yes" onclick="go(5)">YES ❤️</button>
+    <button class="no" onclick="go(5)">NO 😏</button>
+  </div>
+</div>
+
+<!-- 5 I KNEW IT -->
+<div class="page" id="page5">
+  <img src="i-knew-it.png">
+  <button class="nextBtn" onclick="go(6)">Continue 🥹</button>
+</div>
+
+<!-- 6 DATE QUESTION -->
+<div class="page" id="page6">
+  <img src="date.png">
+  <div class="choice">
+    <button class="yes" onclick="go(7)">YES 💕</button>
+    <button class="no" onclick="go(7)">NO 😌</button>
+  </div>
+</div>
+
+<!-- 7 YAY -->
+<div class="page" id="page7">
+  <img src="yay.png">
+  <button class="nextBtn" onclick="go(8)">Next 💗</button>
+</div>
+
+<!-- 8 SURPRISE -->
+<div class="page" id="page8">
+  <img src="surprise.png">
+  <button class="nextBtn" onclick="go(9)">OPEN MY SURPRISE 🎁</button>
+</div>
+
+<!-- 9 BALLOONS -->
+<div class="page" id="page9">
+  <img src="balloons.png">
+
+  <div class="balloon-area">
+
+    <button class="balloon-hit b1" onclick="popBalloon(1)"></button>
+
+    <button class="balloon-hit b2" onclick="popBalloon(2)"></button>
+
+    <button class="balloon-hit b3" onclick="popBalloon(3)"></button>
+
+    <button class="balloon-hit b4" onclick="popBalloon(4)"></button>
+
+  </div>
+</div>
+
+<!-- 10 LOVE LETTER -->
+<div class="page" id="page10">
+  <img src="letter.png">
+  <button class="nextBtn" onclick="go(11)">Next ❤️</button>
+</div>
+
+<!-- 11 DID YOU LIKE IT -->
+<div class="page" id="page11">
+  <img src="final.png">
+
+  <div class="choice">
+    <button class="yes" onclick="go(12)">YES 🥹❤️</button>
+    <button class="no" onclick="go(12)">NO 😭</button>
+  </div>
+</div>
+
+<!-- 12 LAST PAGE -->
+<div class="page" id="page12">
+  <div class="finalText">
+    <div class="heart">🥹❤️</div>
+    <h1>I KNOW YOU WOULD</h1>
+    <p>
+      Because I know you love me<br>
+      as much as I love you. 💗
+    </p>
+    <br>
+    <p>
+      You are my favourite person<br>
+      and my happiest place. 🫶
+    </p>
+  </div>
+</div>
+
+<script>
+
+let popped = 0;
+
+function go(pageNumber){
+
+  document.querySelectorAll(".page").forEach(page=>{
+    page.classList.remove("active");
+  });
+
+  document.getElementById("page"+pageNumber).classList.add("active");
+}
+
+const messages = {
+  1:"You are my favourite person in the whole world. ❤️",
+  2:"Every moment with you feels special. 🥹💗",
+  3:"Thank you for being my happiness. 🫶",
+  4:"I love you more than words can ever explain. ❤️"
+};
+
+function popBalloon(number){
+
+  const balloon = document.querySelector(".b"+number);
+
+  if(balloon.classList.contains("popped")) return;
+
+  balloon.classList.add("popped");
+  popped++;
+
+const oldMessage = document.querySelector(".message");
+
+if(oldMessage){
+  oldMessage.remove();
+}
+
+const message = document.createElement("div");
+message.className = "message";
+message.innerText = messages[number];
+
+document.getElementById("page9").appendChild(message);
+
+setTimeout(() => {
+
+  message.remove();
+
+  if(popped === 4){
+    setTimeout(() => {
+      go(10);
+    }, 500);
+  }
+
+}, 1800);
+
+}
+</script>
+
+</body>
+</html>
+
+ 
